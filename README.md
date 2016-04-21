@@ -1,8 +1,11 @@
 # PIphoto client
 
-System for Wireless or mobile tethered shooting and transferring the pictures to a remote PC, tablet or server.
+System for Wireless or mobile tethered shooting and transferring the pictures to a remote PC, tablet or server using a Raspberry Pi.
 
 #About
+Inspired by the following blogpost [Camera Pi – DSLR Camera with Embedded Computer](http://www.davidhunt.ie/raspberry-pi-in-a-dslr-camera/) i decedid to recreate (to some extent) this project using the new Raspberry Pi 3. **PIphoto** allows you to attach your Raspberry PI 3 to your camera (DSLR/Point-and-Shoot) and take pictures in **Raw or jpeg** format, resize those iamges on the fly and send them to a remote system (PC/tablet/server). 
+
+<blockquote>Simply put, PIphoto makes your camera as connected as your smartphone.</blockquote>
 
 #Features
 
