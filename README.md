@@ -1,5 +1,7 @@
 # PIphoto client
 
+[![Join the chat at https://gitter.im/piphoto/piphotoclient](https://badges.gitter.im/piphoto/piphotoclient.svg)](https://gitter.im/piphoto/piphotoclient?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 System for Wireless or mobile tethered shooting and transferring the pictures to a remote PC, tablet or server using a Raspberry Pi.
 
 #About
