@@ -1,0 +1,2 @@
+defmodule Piphotoclient do
+end
