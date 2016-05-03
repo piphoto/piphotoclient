@@ -36,7 +36,7 @@ ACTION=="remove", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTR
 ```
 This udev rule adds a symlink named **ccapture** in the /dev directory when a Canon usb device is inserted into the Raspberry PI. This enables us to reference the camera by its symlink. Note that my camera is a Canon. Replace **ATTRS{idVendor}=="04a9"** with **ATTRS{idVendor}=="04b0"** if your camera is a Nikon. 
 
-Now we create a device unit for systemd, create a file **/etc/systemd/system/capture.service"** and add the following:
+Now we have to add a device unit for systemd, create a file **/etc/systemd/system/capture.service"** and add the following:
 ```
 [Unit]
 Description=Capture with gphoto %i
@@ -55,7 +55,7 @@ StandardOutput=journal
 [Install]
 WantedBy=dev-ccapture.device
 ```
-The last thing we have to do for the basic setup is to add a simple shell script:
+We add a simple shell script for starting gphoto2 with our parameters:
 ```
 sudo touch /usr/bin/cap
 ```
@@ -65,7 +65,15 @@ Add the following two lines to the /usr/bin/cap file:
 gphoto2 --capture-tethered || exit 0
 ```
 
+The last step for the basic setup is to reload the udev and systemd:
+```
+sudo udevadm control --reload-rules
+sudo systemctl daemon-reload
+sudo systemctl enable capture.service
+sudo systemctl start capture.service
+```
 
+Connect your camera and take a picture, if everything is correct the photo's should be saved on your device in the **/home/alarm/capture/received** directory.
 
 #Contributing 
 Please, do! Check out the latest issues to see what needs being done, or add your own cool thing.
