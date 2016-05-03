@@ -19,9 +19,19 @@ Then install the essential packages with the following command:
 ```
 sudo pacman -S inotify-tools elixir gphoto2 dcraw imagemagick
 ```
+Next we are going to add a udev rule and a systemd unit file. We need these so that the Raspberry Pi 3 recognizes the camera and starts gphoto2 in tethered shooting mode.
 
+```
+sudo touch /etc/udev/30-capture.rules
+```
+Now use your favorite text editor (vim/emacs/nano) to add the following:
+```
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9", GROUP="capture", SYMLINK+="ccapture"
+ACTION=="remove", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9"
+```
+This udev rule adds a symlink named **ccapture** in the /dev directory when a Canon usb device is inserted into the Raspberry PI. This enables us to reference the camera by its symlink. Note that my camera is a Canon. Replace **ATTRS{idVendor}=="04b0"** if your camera is a Nikon.
 
-#Contributing
+#Contributing 
 Please, do! Check out the latest issues to see what needs being done, or add your own cool thing.
 
 #License
