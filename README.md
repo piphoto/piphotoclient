@@ -15,6 +15,11 @@ First we need to install Archlinux on our Raspberry Pi 3/2. These instructions a
 
 * Login as the default user ***alarm*** with the password ***alarm***.
 * The default root password is root.
+
+Create a directory to save the images and or video:
+```
+mkdir -p capture/{received,jpg,raw,video}
+```
 Then install the essential packages with the following command:
 ```
 sudo pacman -S inotify-tools elixir gphoto2 dcraw imagemagick
@@ -29,7 +34,38 @@ Now use your favorite text editor (vim/emacs/nano) to add the following:
 ACTION=="add", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9", GROUP="capture", SYMLINK+="ccapture"
 ACTION=="remove", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9"
 ```
-This udev rule adds a symlink named **ccapture** in the /dev directory when a Canon usb device is inserted into the Raspberry PI. This enables us to reference the camera by its symlink. Note that my camera is a Canon. Replace **ATTRS{idVendor}=="04b0"** if your camera is a Nikon.
+This udev rule adds a symlink named **ccapture** in the /dev directory when a Canon usb device is inserted into the Raspberry PI. This enables us to reference the camera by its symlink. Note that my camera is a Canon. Replace **ATTRS{idVendor}=="04a9"** with **ATTRS{idVendor}=="04b0"** if your camera is a Nikon. 
+
+Now we create a device unit for systemd, create a file **/etc/systemd/system/capture.service"** and add the following:
+```
+[Unit]
+Description=Capture with gphoto %i
+After=dev-ccapture.device
+BindsTo=dev-ccapture.device
+Requisite=dev-ccapture.device
+
+[Service]
+WorkingDirectory=/home/alarm/capture/received
+ExecStartPre=/usr/bin/gphoto2 --set-config capturetarget=1
+ExecStart=/usr/bin/cap
+User=alarm
+Restart=always
+SuccessExitStatus=1 2 8 9 15 SIGKILL
+StandardOutput=journal
+[Install]
+WantedBy=dev-ccapture.device
+```
+The last thing we have to do for the basic setup is to add a simple shell script:
+```
+sudo touch /usr/bin/cap
+```
+Add the following two lines to the /usr/bin/cap file:
+```
+#!/bin/bash
+gphoto2 --capture-tethered || exit 0
+```
+
+
 
 #Contributing 
 Please, do! Check out the latest issues to see what needs being done, or add your own cool thing.
