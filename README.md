@@ -10,6 +10,17 @@ Inspired by the following blogpost [Camera Pi – DSLR Camera with Embedded Comp
 Doesn't this functionality already exist? Yes kinda, there are mobile applications which seem to have this kind of functionality. There are also devices created by camera manufacturers which seem to implement this kind of functionality, for instance the
 [wireless file transmitter](https://www.usa.canon.com/internet/portal/us/home/products/details/cameras/wireless-file-transmitter/wireless-file-transmitter-wft-e6a) created by Canon. But one problem with the wireless file transmitter is its hefty price. Expect to pay between 450 and 600 USD. Another problem is that the WiFi transmitter only works over WiFI. In a time where everybody seems to be connected via 3G/4G/LTE its seems more than logical that photographers should be able to use that technology for transferrring their images. The **Raspberry Pi with its built-in WiFi** or connected with a **3G/4G/LTE USB dongle** feels like a perfect candidate to create a truly mobile photography workflow.
 
+#Project dependencies
+
+* [Raspberry Pi (2/3)](https://www.raspberrypi.org/) - The Raspberry Pi is a low cost, credit-card sized computer. It’s capable of doing everything you’d expect a desktop computer to do.
+* [microSD](https://simple.wikipedia.org/wiki/MicroSD) - The size of the needed microSD cards depends on the fact if one is shooting in **RAW**, **RAW+JPEG**, or **JPEG** mode only. But for testing purpose a size of **4GB/8GB** should be sufficient.
+* [Linux distribution](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3) - For this project we are going to use Arch Linux. Although others can be used, e.g. [Rasbian](https://www.raspbian.org/FrontPage).
+* [inotify-tools](https://github.com/rvoicilas/inotify-tools/wiki) - inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify. These programs can be used to monitor and act upon filesystem events.  
+* [Elixir programming language](http://elixir-lang.org/) - Elixir is a dynamic, functional language designed for building scalable and maintainable applications.
+* [gPhoto2](http://gphoto.sourceforge.net/) - gPhoto2 is a free, redistributable, ready to use set of digital camera software applications for Unix-like systems, written by a whole team of dedicated volunteers around the world. It supports more than 2100 cameras.
+* [dcraw](http://www.cybercom.net/~dcoffin/dcraw/) - Decoding raw digital photos in Linux.
+* [libvips](http://www.vips.ecs.soton.ac.uk/index.php?title=Libvips) - libvips is a fully demand-driven, threaded image processing library with no image size limits and with good support for colour. It is mature and documented.
+
 #Getting started
 First we need to install Archlinux on our Raspberry Pi 3/2. These instructions assume you are installing Archlinux from an existing linux installation. Follow the installation guide on the [archlinux|ARM site](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3). Use the serial console or SSH to the IP address give to the board by your router.
 
