@@ -10,7 +10,16 @@ Inspired by the following blogpost [Camera Pi – DSLR Camera with Embedded Comp
 Doesn't this functionality already exist? Yes kinda, there are mobile applications which seem to have this kind of functionality. There are also devices created by camera manufacturers which seem to implement this kind of functionality, for instance the
 [wireless file transmitter](https://www.usa.canon.com/internet/portal/us/home/products/details/cameras/wireless-file-transmitter/wireless-file-transmitter-wft-e6a) created by Canon. But one problem with the wireless file transmitter is its hefty price. Expect to pay between 450 and 600 USD. Another problem is that the WiFi transmitter only works over WiFI. In a time where everybody seems to be connected via 3G/4G/LTE its seems more than logical that photographers should be able to use that technology for transferrring their images. The **Raspberry Pi with its built-in WiFi** or connected with a **3G/4G/LTE USB dongle** feels like a perfect candidate to create a truly mobile photography workflow.
 
-#Features
+#Getting started
+First we need to install Archlinux on our Raspberry Pi 3/2. These instructions assume you are installing Archlinux from an existing linux installation. Follow the installation guide on the [archlinux|ARM site](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3). Use the serial console or SSH to the IP address give to the board by your router.
+
+* Login as the default user ***alarm*** with the password ***alarm***.
+* The default root password is root.
+Then install the essential packages with the following command:
+```
+sudo pacman -S inotify-tools elixir gphoto2 dcraw imagemagick
+```
+
 
 #Contributing
 Please, do! Check out the latest issues to see what needs being done, or add your own cool thing.
