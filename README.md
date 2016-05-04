@@ -21,7 +21,7 @@ Doesn't this functionality already exist? Yes kinda, there are mobile applicatio
 * [dcraw](http://www.cybercom.net/~dcoffin/dcraw/) - Decoding raw digital photos in Linux.
 * [libvips](http://www.vips.ecs.soton.ac.uk/index.php?title=Libvips) - libvips is a fully demand-driven, threaded image processing library with no image size limits and with good support for colour. It is mature and documented.
 
-#Getting started
+#Getting started(incomplete -- not working)
 First we need to install Archlinux on our Raspberry Pi 3/2. These instructions assume you are installing Archlinux from an existing linux installation. Follow the installation guide on the [archlinux|ARM site](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3). Use the serial console or SSH to the IP address give to the board by your router.
 
 * Login as the default user ***alarm*** with the password ***alarm***.
