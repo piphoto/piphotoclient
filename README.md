@@ -42,7 +42,7 @@ sudo touch /etc/udev/30-capture.rules
 ```
 Now use your favorite text editor (vim/emacs/nano) to add the following:
 ```
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9", GROUP="capture", TAGS+="systemd", SYMLINK+="ccapture"
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9", GROUP="capture", TAG+="systemd", SYMLINK+="ccapture"
 ACTION=="remove", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9"
 ```
 This udev rule adds a symlink named **ccapture** in the /dev directory when a Canon usb device is inserted into the Raspberry PI. This enables us to reference the camera by its symlink. Note that my camera is a Canon. Replace **ATTRS{idVendor}=="04a9"** with **ATTRS{idVendor}=="04b0"** if your camera is a Nikon. 
