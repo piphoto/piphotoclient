@@ -38,7 +38,7 @@ As root issue the following: pacman -Syu sudo inotify-tools elixir gphoto2 dcraw
 Next we are going to add a udev rule and a systemd unit file. We need these so that the Raspberry Pi 3 recognizes the camera and starts gphoto2 in tethered shooting mode.
 
 ```
-sudo touch /etc/udev/30-capture.rules
+sudo touch /etc/udev/rules.d/30-capture.rules
 ```
 Now use your favorite text editor (vim/emacs/nano) to add the following:
 ```
