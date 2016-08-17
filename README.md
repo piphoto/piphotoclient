@@ -58,7 +58,7 @@ Requisite=dev-ccapture.device
 [Service]
 WorkingDirectory=/home/alarm/capture/received
 ExecStartPre=/usr/bin/gphoto2 --set-config capturetarget=1
-ExecStart=/usr/bin/gphoto2 --captuture-tethered
+ExecStart=/usr/bin/gphoto2 --capture-tethered
 User=alarm
 Restart=always
 SuccessExitStatus=1 2 8 9 15 SIGKILL
