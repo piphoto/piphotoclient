@@ -21,7 +21,7 @@ Doesn't this functionality already exist? Yes kinda, there are mobile applicatio
 * [dcraw](http://www.cybercom.net/~dcoffin/dcraw/) - Decoding raw digital photos in Linux.
 * [libvips](http://www.vips.ecs.soton.ac.uk/index.php?title=Libvips) - libvips is a fully demand-driven, threaded image processing library with no image size limits and with good support for colour. It is mature and documented.
 
-#Getting started(incomplete -- not working)
+#Getting started
 First we need to install Archlinux on our Raspberry Pi 3/2. These instructions assume you are installing Archlinux from an existing linux installation. Follow the installation guide on the [archlinux|ARM site](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3). Use the serial console or SSH to the IP address give to the board by your router.
 
 * Login as the default user ***alarm*** with the password ***alarm***.
@@ -33,7 +33,7 @@ mkdir -p capture/{received,jpg,raw,video}
 ```
 Then install the essential packages with the following command:
 ```
-sudo pacman -S sudo inotify-tools elixir gphoto2 dcraw imagemagick libwebp
+As root issue the following: pacman -S sudo inotify-tools elixir gphoto2 dcraw imagemagick libwebp
 ```
 Next we are going to add a udev rule and a systemd unit file. We need these so that the Raspberry Pi 3 recognizes the camera and starts gphoto2 in tethered shooting mode.
 
@@ -42,7 +42,7 @@ sudo touch /etc/udev/30-capture.rules
 ```
 Now use your favorite text editor (vim/emacs/nano) to add the following:
 ```
-ACTION=="add", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9", GROUP="capture", SYMLINK+="ccapture"
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9", GROUP="capture", TAGS+="systemd", SYMLINK+="ccapture"
 ACTION=="remove", SUBSYSTEM=="usb", ATTRS{product}=="Canon Digital Camera", ATTRS{idVendor}=="04a9"
 ```
 This udev rule adds a symlink named **ccapture** in the /dev directory when a Canon usb device is inserted into the Raspberry PI. This enables us to reference the camera by its symlink. Note that my camera is a Canon. Replace **ATTRS{idVendor}=="04a9"** with **ATTRS{idVendor}=="04b0"** if your camera is a Nikon. 
@@ -58,22 +58,12 @@ Requisite=dev-ccapture.device
 [Service]
 WorkingDirectory=/home/alarm/capture/received
 ExecStartPre=/usr/bin/gphoto2 --set-config capturetarget=1
-ExecStart=/usr/bin/cap
+ExecStart=/usr/bin/gphoto2 --captuture-tethered
 User=alarm
 Restart=always
 SuccessExitStatus=1 2 8 9 15 SIGKILL
-StandardOutput=journal
 [Install]
 WantedBy=dev-ccapture.device
-```
-We add a simple shell script for starting gphoto2 with our parameters:
-```
-sudo touch /usr/bin/cap
-```
-Add the following two lines to the /usr/bin/cap file:
-```
-#!/bin/bash
-gphoto2 --capture-tethered || exit 0
 ```
 
 The last step for the basic setup is to reload the udev and systemd:
