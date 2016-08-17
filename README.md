@@ -31,11 +31,7 @@ Create a directory to save the images and or video:
 ```
 mkdir -p capture/{received,jpg,raw,video}
 ```
-As root add our user "alarm" to /etc/sudoers file:
-```
-# echo "alarm ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-```
 As root create the group "capture" and add user alarm to the group "capture":
 
 ```
@@ -45,6 +41,11 @@ As root create the group "capture" and add user alarm to the group "capture":
 Then install the essential packages with the following command:
 ```
 As root issue the following: pacman -Syu sudo inotify-tools elixir gphoto2 dcraw imagemagick libwebp
+```
+As root add our user "alarm" to /etc/sudoers file:
+```
+# echo "alarm ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 ```
 Next we are going to add a udev rule and a systemd unit file. We need these so that the Raspberry Pi 3 recognizes the camera and starts gphoto2 in tethered shooting mode.
 
