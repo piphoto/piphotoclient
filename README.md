@@ -31,12 +31,17 @@ Create a directory to save the images and or video:
 ```
 mkdir -p capture/{received,jpg,raw,video}
 ```
+As root add our user "alarm" to /etc/sudoers file:
+```
+# echo "alarm ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+```
 As root create the group "capture" and add user alarm to the group "capture":
 
 ```
 # groupadd capture && gpasswd -a alarm capture
-```
 
+```
 Then install the essential packages with the following command:
 ```
 As root issue the following: pacman -Syu sudo inotify-tools elixir gphoto2 dcraw imagemagick libwebp
