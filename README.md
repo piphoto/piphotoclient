@@ -33,7 +33,7 @@ mkdir -p capture/{received,jpg,raw,video}
 ```
 Then install the essential packages with the following command:
 ```
-As root issue the following: pacman -S sudo inotify-tools elixir gphoto2 dcraw imagemagick libwebp
+As root issue the following: pacman -Syu sudo inotify-tools elixir gphoto2 dcraw imagemagick libwebp
 ```
 Next we are going to add a udev rule and a systemd unit file. We need these so that the Raspberry Pi 3 recognizes the camera and starts gphoto2 in tethered shooting mode.
 
@@ -68,7 +68,6 @@ WantedBy=dev-ccapture.device
 
 The last step for the basic setup is to reload the udev and systemd:
 ```
-sudo udevadm control --reload-rules
 sudo systemctl daemon-reload
 sudo systemctl enable capture.service
 sudo systemctl start capture.service
