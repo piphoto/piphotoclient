@@ -40,7 +40,7 @@ As root create the group "capture" and add user alarm to the group "capture":
 ```
 Then install the essential packages with the following command:
 ```
-As root issue the following: pacman -Syu sudo inotify-tools elixir gphoto2 dcraw imagemagick libwebp
+As root issue the following: sudo pacman -Syu inotify-tools elixir gphoto2 dcraw imagemagick libwebp
 ```
 As root add our user "alarm" to /etc/sudoers file:
 ```
